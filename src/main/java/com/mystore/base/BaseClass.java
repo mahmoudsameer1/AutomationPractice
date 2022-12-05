@@ -19,10 +19,9 @@ import com.mystore.utility.ExtentManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
+	
 	public static Properties prop;
-
 	public static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
-
 
 	@BeforeSuite(groups = { "Smoke", "Sanity", "Regression" })
 	public void loadConfig() {
@@ -61,14 +60,14 @@ public class BaseClass {
 
 		getDriver().manage().window().maximize();
 		getDriver().manage().deleteAllCookies();
-		getDriver().manage().timeouts().implicitlyWait
-		(Integer.parseInt(prop.getProperty("implicitWait")),TimeUnit.SECONDS);
-		getDriver().manage().timeouts().pageLoadTimeout
-		(Integer.parseInt(prop.getProperty("pageLoadTimeOut")),TimeUnit.SECONDS);
+		getDriver().manage().timeouts().implicitlyWait(Integer.parseInt(prop.getProperty("implicitWait")),
+				TimeUnit.SECONDS);
+		getDriver().manage().timeouts().pageLoadTimeout(Integer.parseInt(prop.getProperty("pageLoadTimeOut")),
+				TimeUnit.SECONDS);
 		getDriver().get(prop.getProperty("url"));
 	}
 
-	@AfterSuite(groups = { "Smoke", "Regression","Sanity" })
+	@AfterSuite(groups = { "Smoke", "Regression", "Sanity" })
 	public void afterSuite() {
 		ExtentManager.endReport();
 	}
